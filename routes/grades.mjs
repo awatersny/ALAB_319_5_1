@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 // Get a single grade entry
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("grades");
-  let query = { _id: ObjectId(req.params.id) };
+  let query = { _id: new ObjectId(req.params.id) };
   let result = await collection.findOne(query);
 
   if (!result) res.send("Not found").status(404);
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 // Add a score to a grade entry
 router.patch("/:id/add", async (req, res) => {
   let collection = await db.collection("grades");
-  let query = { _id: ObjectId(req.params.id) };
+  let query = { _id: new ObjectId(req.params.id) };
 
   let result = await collection.updateOne(query, {
     $push: { scores: req.body }
@@ -45,7 +45,7 @@ router.patch("/:id/add", async (req, res) => {
 // Remove a score from a grade entry
 router.patch("/:id/remove", async (req, res) => {
   let collection = await db.collection("grades");
-  let query = { _id: ObjectId(req.params.id) };
+  let query = { _id: new ObjectId(req.params.id) };
 
   let result = await collection.updateOne(query, {
     $pull: { scores: req.body }
@@ -58,7 +58,7 @@ router.patch("/:id/remove", async (req, res) => {
 // Delete a single grade entry
 router.delete("/:id", async (req, res) => {
   let collection = await db.collection("grades");
-  let query = { _id: ObjectId(req.params.id) };
+  let query = { _id: new ObjectId(req.params.id) };
   let result = await collection.deleteOne(query);
 
   if (!result) res.send("Not found").status(404);
@@ -67,7 +67,7 @@ router.delete("/:id", async (req, res) => {
 
 // Get route for backwards compatibility
 router.get("/student/:id", async (req, res) => {
-  res.redirect(`learner/${req.params.id}`);
+  res.redirect(`/grades/learner/${req.params.id}`);
 });
 
 // Get a learner's grade data
