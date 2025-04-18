@@ -66,6 +66,18 @@ router.get("/:id", async (req, res) => {
 //   else res.send(result).status(200);
 // });
 
+router.patch("/:id/add", async (req, res) => {
+  try {
+    const grade = await Grade.findById(req.params.id)
+    grade.scores.push(req.body)
+    await grade.save()
+    console.log("patch", req.body)
+    res.send(grade).status(200)
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
+
 // // Remove a score from a grade entry
 // router.patch("/:id/remove", async (req, res) => {
 //   let collection = await db.collection("grades");
@@ -78,6 +90,14 @@ router.get("/:id", async (req, res) => {
 //   if (!result) res.send("Not found").status(404);
 //   else res.send(result).status(200);
 // });
+
+router.patch("/:id/remove", async (req, res) => {
+  try {
+    
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
 
 // // Delete a single grade entry
 // router.delete("/:id", async (req, res) => {
@@ -128,6 +148,13 @@ router.get("/learner/:id", async (req, res) => {
 //   else res.send(result).status(200);
 // });
 
+router.delete("/learner/:id", async (req, res) => {
+  try {
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
+
 // // Get a class's grade data
 // router.get("/class/:id", async (req, res) => {
 //   let collection = await db.collection("grades");
@@ -164,6 +191,13 @@ router.get("/class/:id", async (req, res) => {
 //   else res.send(result).status(200);
 // });
 
+router.patch("/class/:id", async (req, res) => {
+  try {
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
+
 // // Delete a class
 // router.delete("/class/:id", async (req, res) => {
 //   let collection = await db.collection("grades");
@@ -174,5 +208,12 @@ router.get("/class/:id", async (req, res) => {
 //   if (!result) res.send("Not found").status(404);
 //   else res.send(result).status(200);
 // });
+
+router.delete("/class/:id", async (req, res) => {
+  try {
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
 
 export default router;
