@@ -13,12 +13,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/grades", grades);
-// app.use("/grades", grades_agg);
+app.use("/grades", grades_agg);
 
 // Global error handling
-// app.use((err, _req, res, next) => {
-//   res.status(500).send("Seems like we messed up somewhere...");
-// });
+app.use((err, _req, res, next) => {
+  res.status(500).send("Seems like we messed up somewhere...");
+});
 
 // Start the Express server
 app.listen(PORT, () => {

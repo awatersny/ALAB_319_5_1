@@ -23,6 +23,17 @@ const router = express.Router();
 //   res.send(result).status(204);
 // });
 
+router.post("/", async (req, res) => {
+  try {
+    const newGrade = req.body
+    const result = await Grade.insertOne(newGrade)
+    console.log("post", req.body)
+    res.send(result).status(204)
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
+
 // // Get a single grade entry
 // router.get("/:id", async (req, res) => {
 //   let collection = await db.collection("grades");
@@ -38,7 +49,7 @@ router.get("/:id", async (req, res) => {
     const result = await Grade.findById(req.params.id)
     res.send(result).status(200);
   } catch (error) {
-    res.send("Not found").status(404);
+    res.send({error: error}).status(404);
   }
 });
 
