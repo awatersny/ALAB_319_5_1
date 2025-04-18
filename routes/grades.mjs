@@ -35,7 +35,7 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
   try {
-    let result = await Grade.findById(req.params.id)
+    const result = await Grade.findById(req.params.id)
     res.send(result).status(200);
   } catch (error) {
     res.send("Not found").status(404);
@@ -78,10 +78,10 @@ router.get("/:id", async (req, res) => {
 //   else res.send(result).status(200);
 // });
 
-// // Get route for backwards compatibility
-// router.get("/student/:id", async (req, res) => {
-//   res.redirect(`/grades/learner/${req.params.id}`);
-// });
+// Get route for backwards compatibility
+router.get("/student/:id", async (req, res) => {
+  res.redirect(`/grades/learner/${req.params.id}`);
+});
 
 // // Get a learner's grade data
 // router.get("/learner/:id", async (req, res) => {
@@ -96,6 +96,15 @@ router.get("/:id", async (req, res) => {
 //   if (!result) res.send("Not found").status(404);
 //   else res.send(result).status(200);
 // });
+
+router.get("/learner/:id", async (req, res) => {
+  try {
+    const result = await Grade.find({learner_id: req.params.id})
+    res.send(result).status(200);
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
 
 // // Delete a learner's grade data
 // router.delete("/learner/:id", async (req, res) => {

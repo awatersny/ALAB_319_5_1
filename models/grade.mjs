@@ -5,11 +5,11 @@ const gradeSchema = new mongoose.Schema({
     type: [Object],
     required: true
   },
-  classId: {
+  class_id: {
     type: Number,
     required: true
   },
-  learnerId: {
+  learner_id: {
     type: Number,
     required: true
   }
