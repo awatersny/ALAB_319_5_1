@@ -131,6 +131,15 @@ router.get("/learner/:id", async (req, res) => {
 //   else res.send(result).status(200);
 // });
 
+router.get("/class/:id", async (req, res) => {
+  try {
+    const result = await Grade.find({class_id: req.params.id})
+    res.send(result).status(200);
+  } catch (error) {
+    res.send({error: error}).status(404);
+  }
+})
+
 // // Update a class id
 // router.patch("/class/:id", async (req, res) => {
 //   let collection = await db.collection("grades");
