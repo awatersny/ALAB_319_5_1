@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const gradeSchema = new mongoose.Schema({
   scores: {
-    type: [Number],
+    type: [Object],
     required: true
   },
   classId: {
@@ -14,3 +14,5 @@ const gradeSchema = new mongoose.Schema({
     required: true
   }
 })
+
+export default mongoose.model("Grade", gradeSchema)
